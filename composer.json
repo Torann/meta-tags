@@ -1,0 +1,40 @@
+{
+  "name": "torann/meta-tags",
+  "description": "Extremely simple meta tag generator.",
+  "keywords": ["meta tags", "tags", "open graph", "metadata"],
+  "license": "BSD 2-Clause",
+  "authors": [
+    {
+      "name": "Daniel Stainback",
+      "email": "daniel@lyften.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0",
+    "mockery/mockery": "^0.9.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "MetaTags\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MetaTags\\Test\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
+    }
+  },
+  "archive" : {
+    "exclude": [
+      "/docs",
+      "/tests"
+    ]
+  }
+}
