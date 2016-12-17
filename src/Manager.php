@@ -187,7 +187,9 @@ class Manager
      */
     public function url($url = null)
     {
-        $url = $url ?: 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        if (!$url && isset($_SERVER['HTTP_HOST'])) {
+            $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        }
 
         return $this->set('url', $url);
     }
