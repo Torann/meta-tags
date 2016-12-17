@@ -242,6 +242,11 @@ class Manager
      */
     public function set($name, $value, array $attributes = [])
     {
+        // Skip empties
+        if ($value === null && empty($attributes)) {
+            return $this;
+        }
+
         // Validate attributes
         if ($this->config('validate', false) === true && empty($attributes) === false) {
             $this->validation($name, $attributes);
@@ -468,6 +473,13 @@ class Manager
             }
         }
 
+        // Twitter specific tags
+        foreach ($this->tags['twitter'] as $name => $tag) {
+            if (in_array($name, ['image:alt']) === false) {
+                $output[] = $this->renderTag("twitter:{$name}", $tag['value'], $tag['attributes']);
+            }
+        }
+
         // Render Twitter image tags
         if ($image = $this->get('image')) {
             $output[] = $this->renderTag("twitter:image", $image['value'], $image['attributes']);
@@ -475,13 +487,6 @@ class Manager
             // Include image alt
             if ($image_alt = $this->get('image:alt', 'twitter')) {
                 $output[] = $this->renderTag("twitter:image:alt", $image_alt['value'], $image_alt['attributes']);
-            }
-        }
-
-        // Twitter specific tags
-        foreach ($this->tags['twitter'] as $name => $tag) {
-            if (in_array($name, ['image:alt']) === false) {
-                $output[] = $this->renderTag("twitter:{$name}", $tag['value'], $tag['attributes']);
             }
         }
 
