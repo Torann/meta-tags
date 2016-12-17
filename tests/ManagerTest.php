@@ -106,23 +106,6 @@ class ContextTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     */
-    public function shouldAutomaticallySetUrl()
-    {
-        $result = "<meta property=\"og:type\" content=\"website\">\n"
-            . "<meta property=\"og:url\" content=\"http://\">";
-
-        $og = new \MetaTags\Manager([
-            'twitter' => false,
-        ]);
-
-        $og->url();
-
-        $this->assertEquals($result, $og->__toString());
-    }
-
-    /**
-     * @test
      * @expectedException     \Exception
      */
     public function textTypeValidation()
