@@ -263,7 +263,7 @@ class Manager
         // matches a special value.
         $type = 'general';
 
-        // Determine if the tag is twitter specific
+        // Determine if the tag is Twitter specific
         if (substr($name, 0, 8) === 'twitter_') {
             $type = 'twitter';
             $name = str_replace('_', ':', substr($name, 8));
@@ -529,6 +529,18 @@ class Manager
         // Tags that are just name spaces
         if (in_array($method, ['article', 'book', 'profile'])) {
             return $this->set($method, null, $parameters[0]);
+        }
+
+        // Bulk Social media setter
+        if ($method === 'twitter') {
+            foreach($parameters[0] as $name => $value) {
+                call_user_func_array([$this, 'set'], [
+                    "twitter_{$name}",
+                    $value
+                ]);
+            }
+
+            return $this;
         }
 
         // Snake case the method
