@@ -528,11 +528,9 @@ class Manager
     {
         $output = [];
 
-        // Render standard tags
-        foreach (['title', 'description'] as $name) {
-            if ($tag = $this->get($name)) {
-                $output[] = $this->renderTag($name, $tag['value'], $tag['attributes']);
-            }
+        // Render standard description tag
+        if ($tag = $this->get('description')) {
+            $output[] = $this->renderTag('description', $tag['value'], $tag['attributes']);
         }
 
         // Render Open Graph tags
