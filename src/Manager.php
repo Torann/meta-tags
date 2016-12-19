@@ -529,7 +529,7 @@ class Manager
         $output = [];
 
         // Render standard tags
-        foreach (['description'] as $name) {
+        foreach (['title', 'description'] as $name) {
             if ($tag = $this->get($name)) {
                 $output[] = $this->renderTag($name, $tag['value'], $tag['attributes']);
             }
@@ -546,6 +546,24 @@ class Manager
         }
 
         return implode("\n", $output);
+    }
+
+    /**
+     * Render all tags for Laravel.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function render()
+    {
+        // Dynamically add the title from the view title content block. This helps
+        // keep the title setting out of the controllers.
+        if (array_key_exists('title', $this->tags['general']) === false
+            && $title = trim(preg_replace('!\s+!', ' ', app('view')->yieldContent('title')))
+        ) {
+            $this->set('title', $title);
+        }
+
+        return new \Illuminate\Support\HtmlString($this->__toString());
     }
 
     /**
