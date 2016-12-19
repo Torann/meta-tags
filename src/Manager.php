@@ -475,18 +475,44 @@ class Manager
 
         // Twitter specific tags
         foreach ($this->tags['twitter'] as $name => $tag) {
-            if (in_array($name, ['image:alt']) === false) {
-                $output[] = $this->renderTag("twitter:{$name}", $tag['value'], $tag['attributes']);
+            switch($name) {
+                case 'image':
+                    $output[] = $this->renderTwitterImage($tag);
+                    break;
+                case 'image:alt':
+                    break;
+                default:
+                    $output[] = $this->renderTag("twitter:{$name}", $tag['value'], $tag['attributes']);
             }
         }
 
         // Render Twitter image tags
-        if ($image = $this->get('image')) {
-            $output[] = $this->renderTag("twitter:image", $image['value'], $image['attributes']);
+        if (array_key_exists('image', $this->tags['twitter']) === false
+            && ($image = $this->get('image'))
+        ) {
+            $output[] = $this->renderTwitterImage($image);
+        }
+
+        return implode("\n", $output);
+    }
+
+    /**
+     * Convert the Twitter image into tags.
+     *
+     * @param string $image
+     *
+     * @return string
+     */
+    public function renderTwitterImage($image = null)
+    {
+        $output = [];
+
+        if ($image) {
+            $output[] = $this->renderTag('twitter:image', $image['value'], $image['attributes']);
 
             // Include image alt
             if ($image_alt = $this->get('image:alt', 'twitter')) {
-                $output[] = $this->renderTag("twitter:image:alt", $image_alt['value'], $image_alt['attributes']);
+                $output[] = $this->renderTag('twitter:image:alt', $image_alt['value'], $image_alt['attributes']);
             }
         }
 
