@@ -215,11 +215,11 @@ class Manager
         // Only create the tag as long as it's not
         // just a namespace
         if ($value) {
-            $output[] = str_replace(
-                ['{{name}}', '{{value}}'],
-                [$name, $value],
-                '<meta property="{{name}}" content="{{value}}">'
-            );
+            // The description meta tag uses the name attribute
+            $attr = $name === 'description' ? 'name' : 'property';
+
+            // Create tag
+            $output[] = "<meta {$attr}=\"{$name}\" content=\"{$value}\">";
         }
 
         // Create tag attributes
