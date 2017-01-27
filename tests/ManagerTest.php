@@ -28,7 +28,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
      */
     public function shouldCreateTags()
     {
-        $result = "<meta property=\"description\" content=\"A description\">\n"
+        $result = "<meta name=\"description\" content=\"A description\">\n"
             . "<meta property=\"og:type\" content=\"article\">\n"
             . "<meta property=\"og:title\" content=\"Foo Bar\">\n"
             . "<meta property=\"og:description\" content=\"A description\">\n"
@@ -51,7 +51,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
      */
     public function shouldCreateTagsWithoutTwitter()
     {
-        $result = "<meta property=\"description\" content=\"A description\">\n"
+        $result = "<meta name=\"description\" content=\"A description\">\n"
             . "<meta property=\"og:type\" content=\"article\">\n"
             . "<meta property=\"og:title\" content=\"Foo Bar\">\n"
             . "<meta property=\"og:description\" content=\"A description\">\n"
@@ -74,7 +74,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
      */
     public function shouldTruncateDescription()
     {
-        $result = "<meta property=\"description\" content=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nos...\">\n"
+        $result = "<meta name=\"description\" content=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nos...\">\n"
             . "<meta property=\"og:type\" content=\"website\">\n"
             . "<meta property=\"og:description\" content=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u...\">";
 
