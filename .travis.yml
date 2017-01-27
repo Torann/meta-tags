@@ -4,5 +4,8 @@ php:
   - 5.6
   - 7.0
 
-script:
-  - vendor/bin/phpunit
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install
+
+script: vendor/bin/phpunit
