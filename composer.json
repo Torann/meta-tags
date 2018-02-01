@@ -2,11 +2,11 @@
   "name": "torann/meta-tags",
   "description": "Extremely simple meta tag generator.",
   "keywords": ["meta tags", "tags", "open graph", "metadata"],
-  "license": "BSD 2-Clause",
+  "license": "BSD-2-Clause",
   "authors": [
     {
       "name": "Daniel Stainback",
-      "email": "daniel@lyften.com"
+      "email": "torann@gmail.com"
     }
   ],
   "require": {
